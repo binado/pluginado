@@ -1,0 +1,11 @@
+{
+    "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+    "name": "binado",
+    "description": "A collection of useful personal skills",
+    "version": "0.1.0",
+    "author": {
+        "name": "binado"
+    },
+    "repository": "https://github.com/binado/pluginado",
+    "license": "MIT",
+}
