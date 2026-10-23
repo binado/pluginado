@@ -3,6 +3,6 @@
     "description": "My collection of personal plugins",
     "owner": { "name": "binado" },
     "plugins": [
-        { "name": "binado", "source": "./" }
+        { "name": "workflow", "source": "./plugins/workflow" }
     ]
 }
