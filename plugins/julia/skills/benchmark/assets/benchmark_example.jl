@@ -27,6 +27,8 @@ diagonal_inner_product(a, b, w, method::LoopMethod) = begin
     return result
 end
 
+# Example setup only: the sizes, input generation and trial counts below are placeholders.
+# Adapt them to the function being benchmarked (see SKILL.md).
 function benchmark(; sizes = (129, 4097, 131072))
     methods = [SumMethod(), DotMethod(), DiagMethod(), MapReduceMethod(), LoopMethod()]
     rng = Xoshiro(37)
@@ -45,8 +47,8 @@ function benchmark(; sizes = (129, 4097, 131072))
         end
     end
 
-    write_csv(replace(@__FILE__, r"\.jl$" => ".csv"), results)
-    write_table_md(replace(@__FILE__, r"\.jl$" => ".md"), results)
+    write_csv(joinpath(@__DIR__, "results.csv"), results)
+    write_table_md(joinpath(@__DIR__, "results.md"), results)
 end
 
 # One row per trial, with times in nanoseconds, as in the BenchmarkTools manual.
