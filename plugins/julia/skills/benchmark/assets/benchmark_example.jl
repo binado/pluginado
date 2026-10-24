@@ -2,6 +2,7 @@ using LinearAlgebra
 using BenchmarkTools
 using Random
 using Statistics
+using DelimitedFiles
 
 abstract type DiagonalInnerProductMethod end
 
@@ -49,24 +50,22 @@ end
 
 # One row per trial, with times in nanoseconds, as in the BenchmarkTools manual.
 function write_csv(path, results)
-    open(path, "w") do io
-        println(io, "n,method,samples,evals,min_ns,median_ns,mean_ns,std_ns,allocs,memory_bytes")
-        for (n, method, trial) in results
-            fields = (
-                n,
-                method,
-                length(trial.times),
-                trial.params.evals,
-                minimum(trial).time,
-                median(trial).time,
-                mean(trial).time,
-                std(trial).time,
-                trial.allocs,
-                trial.memory,
-            )
-            println(io, join(fields, ","))
-        end
-    end
+    header = ["n" "method" "samples" "evals" "min_ns" "median_ns" "mean_ns" "std_ns" "allocs" "memory_bytes"]
+    rows = [
+        permutedims(Any[
+            n,
+            method,
+            length(trial.times),
+            trial.params.evals,
+            minimum(trial).time,
+            median(trial).time,
+            mean(trial).time,
+            std(trial).time,
+            trial.allocs,
+            trial.memory,
+        ]) for (n, method, trial) in results
+    ]
+    writedlm(path, vcat(header, reduce(vcat, rows)), ',')
     println("Wrote $path")
 end
 
