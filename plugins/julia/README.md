@@ -12,4 +12,4 @@ Skills for working with Julia, such as benchmarking code with BenchmarkTools.
 
 | Skill | Description |
 | --- | --- |
-| [benchmark](skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, summarizing each trial's statistics in a table, and saving them to a CSV. |
+| [benchmark](skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>/benchmark.jl`, running it, and saving each trial's statistics to `results.md` and `results.csv` next to it. |
