@@ -2,7 +2,7 @@
     "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
     "name": "julia",
     "description": "Skills for working with Julia, such as benchmarking code with BenchmarkTools.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
         "name": "binado"
     },
