@@ -15,3 +15,4 @@ A collection of useful personal skills.
 | [handoff-read](skills/handoff-read/SKILL.md) | Read the latest handoff document and resume the work it describes. |
 | [handoff-write](skills/handoff-write/SKILL.md) | Compact the current conversation into a handoff document for another agent to pick up. |
 | [to-issue](skills/to-issue/SKILL.md) | Write up the current problem as a GitHub issue labelled bug, feature or perf, and post it with the gh CLI. |
+| [scratchpad](skills/scratchpad/SKILL.md) | Create a temporary computation script in the repo's `.scratchpad/` directory, run it, explain its output, and ask whether to delete it. |
