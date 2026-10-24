@@ -12,6 +12,10 @@
         {
             "name": "healthy-repo",
             "source": "./plugins/healthy-repo"
+        },
+        {
+            "name": "julia",
+            "source": "./plugins/julia"
         }
     ]
 }
