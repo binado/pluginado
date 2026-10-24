@@ -1,6 +1,7 @@
 using LinearAlgebra
 using BenchmarkTools
 using Random
+using Statistics
 
 abstract type DiagonalInnerProductMethod end
 
@@ -28,6 +29,7 @@ end
 function benchmark(; sizes = (129, 4097, 131072))
     methods = [SumMethod(), DotMethod(), DiagMethod(), MapReduceMethod(), LoopMethod()]
     rng = Xoshiro(37)
+    results = []
 
     for n in sizes
         a = randn(rng, ComplexF64, n)
@@ -36,9 +38,36 @@ function benchmark(; sizes = (129, 4097, 131072))
 
         for method in methods
             println("Benchmarking n = $n, method: $(typeof(method))")
-            display(@benchmark diagonal_inner_product($a, $b, $w, $method))
+            trial = @benchmark diagonal_inner_product($a, $b, $w, $method)
+            display(trial)
+            push!(results, (n, nameof(typeof(method)), trial))
         end
     end
+
+    write_csv(replace(@__FILE__, r"\.jl$" => ".csv"), results)
+end
+
+# One row per trial, with times in nanoseconds, as in the BenchmarkTools manual.
+function write_csv(path, results)
+    open(path, "w") do io
+        println(io, "n,method,samples,evals,min_ns,median_ns,mean_ns,std_ns,allocs,memory_bytes")
+        for (n, method, trial) in results
+            fields = (
+                n,
+                method,
+                length(trial.times),
+                trial.params.evals,
+                minimum(trial).time,
+                median(trial).time,
+                mean(trial).time,
+                std(trial).time,
+                trial.allocs,
+                trial.memory,
+            )
+            println(io, join(fields, ","))
+        end
+    end
+    println("Wrote $path")
 end
 
 benchmark()

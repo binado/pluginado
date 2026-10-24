@@ -15,13 +15,14 @@ Write a BenchmarkTools.jl script to `./.benchmark/<benchmark-name>.jl` in the re
    - Build inputs from a fixed seed (`Xoshiro(seed)`) so runs are reproducible.
    - Use explicit sizes, and label each case with a `println` before its `@benchmark`.
    - For code that mutates its inputs, use `setup=` and `evals=1` so each sample starts from the same state.
+   - Keep the `write_csv` step from the template. It writes `<benchmark-name>.csv` next to the script, one row per trial, with times in nanoseconds.
 4. **Run it** from the repo root with `julia --project=. .benchmark/<benchmark-name>.jl` (drop `--project=.` if there is no `Project.toml`). Each case takes about 5 seconds by default, so a script with many cases can take minutes. Set a generous timeout.
-5. **Summarize the results.** Report a table with one row per trial:
+5. **Summarize the results.** Read `.benchmark/<benchmark-name>.csv` and report a table with one row per trial, converting nanoseconds to ns, µs or ms:
 
-   | n | method | min | median | mean | allocs | memory |
-   | --- | --- | --- | --- | --- | --- | --- |
+   | n | method | min | median | mean | std | allocs | memory |
+   | --- | --- | --- | --- | --- | --- | --- | --- |
 
-   Take the values from each `Trial` report (`Time (median)`, `Time (mean ± σ)`, `Range (min … max)`, `Memory estimate`, `allocs estimate`). Keep units as printed.
+   Quote the median as the typical time. The min is the least-noisy lower bound, and the mean moves with outliers. For the full sample distribution, use `BenchmarkTools.save` and `BenchmarkTools.load` on the trials instead of the CSV.
 6. **Explain anything surprising.** If a result is not what you expect, give a likely cause, e.g. a method allocating a temporary array in each call, a size that crosses a cache boundary, GC pauses at large `n`, or a timer too coarse for a case that runs in under a microsecond.
 7. **Check the setup.** If the assumptions look weak, propose a specific change to the script and ask before editing it. Look for: globals used inside `@benchmark`, missing `$` interpolation, timings under about 1 µs (the result is mostly noise), a single size where scaling matters, and warm-up or compile time leaking into the numbers.
 8. **Report the file path** so the user can rerun it. Do not commit `.benchmark/`, and add files by name as the git rules require.

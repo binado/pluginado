@@ -38,7 +38,7 @@ claude plugin add workflow@pluginado
 | [to-issue](plugins/workflow/skills/to-issue/SKILL.md) | Write up the current problem as a GitHub issue labelled bug, feature or perf, and post it with the gh CLI. |
 | [scratchpad](plugins/workflow/skills/scratchpad/SKILL.md) | Create a temporary computation script in the repo's `.scratchpad/` directory, run it, explain its output, and ask whether to delete it. |
 | [create-readme](plugins/healthy-repo/skills/create-readme/SKILL.md) | Create a concise README.md for a repository or package from a standard template. |
-| [benchmark](plugins/julia/skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, and summarizing each trial's statistics in a table. |
+| [benchmark](plugins/julia/skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, summarizing each trial's statistics in a table, and saving them to a CSV. |
 
 ## Acknowledgments
 
