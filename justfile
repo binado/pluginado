@@ -4,12 +4,12 @@ validate:
     for p in plugins/*/; do claude plugin validate --strict "$p"; done
 
 # Edit a skill file with $EDITOR
-edit name:
-    $EDITOR "plugins/workflow/skills/{{ name }}/SKILL.md"
+edit plugin skill:
+    $EDITOR "plugins/{{ plugin }}/skills/{{ skill }}/SKILL.md"
 
 # Add a new skill
-add name:
-    bunx skills init "plugins/workflow/skills/{{ name }}/SKILL.md"
+add plugin skill:
+    bunx skills init "plugins/{{ plugin }}/skills/{{ skill }}/SKILL.md"
 
 # Scaffold a new plugin
 create-plugin name description:
