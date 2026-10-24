@@ -3,19 +3,22 @@ name: benchmark
 description: Benchmark Julia code with BenchmarkTools by writing a script to ./.benchmark/<name>.jl, running it, and summarizing each trial's statistics in a table. Use when the user asks to benchmark, time, profile, or compare the speed or allocations of Julia functions or methods, or mentions BenchmarkTools or @benchmark.
 ---
 
-Write a BenchmarkTools.jl script to `./.benchmark/<benchmark-name>.jl` in the repo root, run it, and report the results. Start from [benchmark_example.jl](assets/benchmark_example.jl) in this skill's directory: it compares several implementations of one function over three input sizes.
+Write a BenchmarkTools.jl script to `./.benchmark/<benchmark-name>.jl` in the repo root, run it, and report the results. The template is [benchmark_example.jl](assets/benchmark_example.jl) in this skill's directory.
 
 ## Workflow
 
-1. **Check the environment.** Run `julia --project=. -e 'using BenchmarkTools'` if the repo has a `Project.toml`, otherwise `julia -e 'using BenchmarkTools'`. If it fails, warn the user that BenchmarkTools is not in the active Julia environment, and ask before running `Pkg.add("BenchmarkTools")`. Do not add it without a yes.
-2. **Name the benchmark.** Use kebab-case, 2-4 words, that says what is compared, e.g. `diagonal-inner-product-methods`. Create `.benchmark/` if needed.
-3. **Write the script** to `.benchmark/<benchmark-name>.jl`. Follow these rules:
+1. **Create the script.** Run `scripts/new-benchmark-script.sh <benchmark-name>` from this skill's directory. Use kebab-case, 2-4 words, that says what is compared, e.g. `diagonal-inner-product-methods`. The script copies the template to `<repo root>/.benchmark/<benchmark-name>.jl` and prints its path. It never overwrites a file, so if the name is taken, pick another name or ask the user.
+2. **Relay its warnings** (on stderr):
+   - `BenchmarkTools is not in the active Julia environment`: warn the user and ask before running `Pkg.add("BenchmarkTools")`. Do not add it without a yes.
+   - `julia is not on PATH`: stop and tell the user.
+   - `.benchmark/ is not gitignored`: suggest adding it to `.gitignore`, and edit the file only if the user says yes.
+3. **Edit the script** at the printed path. Follow these rules:
    - Put the code under test in functions. Benchmarks in global scope measure dispatch and boxing, not the code.
    - Interpolate every argument into `@benchmark` with `$`, e.g. `@benchmark f($a, $b)`.
    - Build inputs from a fixed seed (`Xoshiro(seed)`) so runs are reproducible.
    - Use explicit sizes, and label each case with a `println` before its `@benchmark`.
    - For code that mutates its inputs, use `setup=` and `evals=1` so each sample starts from the same state.
-   - Keep the `write_csv` step from the template. It writes `<benchmark-name>.csv` next to the script, one row per trial, with times in nanoseconds.
+   - Keep the `write_csv` step. It writes `<benchmark-name>.csv` next to the script, one row per trial, with times in nanoseconds.
 4. **Run it** from the repo root with `julia --project=. .benchmark/<benchmark-name>.jl` (drop `--project=.` if there is no `Project.toml`). Each case takes about 5 seconds by default, so a script with many cases can take minutes. Set a generous timeout.
 5. **Summarize the results.** Read `.benchmark/<benchmark-name>.csv` and report a table with one row per trial, converting nanoseconds to ns, µs or ms:
 
