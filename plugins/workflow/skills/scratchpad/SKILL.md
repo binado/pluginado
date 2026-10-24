@@ -10,7 +10,7 @@ Run throwaway computations as scripts in `.scratchpad/` instead of inline shell 
 
 1. Pick a name of 3–5 words, in kebab-case, that says what the script does, e.g. `sum-monthly-invoice-totals`.
 2. Run `scripts/new-scratch-script.sh <name>.<ext>` (in this skill's directory), e.g. `scripts/new-scratch-script.sh sum-monthly-invoice-totals.py`. It creates `<repo root>/.scratchpad/` if needed, creates an empty file, and prints its path: `<repo root>/.scratchpad/<timestamp>-<name>.<ext>`. Outside a git repo, it uses the current directory as the root.
-3. If the script prints a `WARN:` line on stderr, tell the user. For a `.scratchpad/` warning, offer to add `.scratchpad/` to the repo's `.gitignore`, and edit it only if they say yes.
+3. Check that `.scratchpad/` is gitignored with `git check-ignore -q .scratchpad/`. If it is not, suggest adding `.scratchpad/` to the repo's `.gitignore`, and edit the file only if the user says yes. The script's `WARN:` line on stderr reports the same thing, so use it as a reminder, not a second check.
 4. Write the code to the printed path, then run it from the repo root.
 5. Explain the output: what was computed, the key results, and anything surprising or failing. If it errors, fix the same file and run it again.
 6. Ask the user whether the script should be removed. Delete it with `rm` only after they say yes.
