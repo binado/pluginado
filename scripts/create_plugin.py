@@ -172,7 +172,7 @@ def main() -> None:
 
     print(f"created {plugin_dir}")
     print("next steps:")
-    print(f"  - add skills under {plugin_dir}/skills/ (just add is wired to the workflow plugin)")
+    print(f"  - add skills under {plugin_dir}/skills/ (just add {args.name} <skill>)")
     print("  - add a row to the plugins table in README.md")
     print("  - run just validate")
 

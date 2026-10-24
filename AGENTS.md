@@ -5,7 +5,8 @@ This file provides guidance to AI Agents when working with code in this reposito
 ## Commands
 
 - `just validate` runs `claude plugin validate --strict` on the marketplace root and each `plugins/*/`. It is the only check in the repo (no tests, no linter). Run it after editing `.claude-plugin/*.json`, `.claude-plugin/marketplace.json`, `plugins/*/plugin.json`, or any SKILL.md frontmatter.
-- `just add <name>` to create a new skill from the repo root
+- `just add <plugin> <skill>` to create a new skill from the repo root
+- `just edit <plugin> <skill>` to open a skill file with `$EDITOR`
 - `just create-plugin <name> <description>` to scaffold a new plugin under `plugins/` (both manifests, README, marketplace entry)
 
 ## Architecture
