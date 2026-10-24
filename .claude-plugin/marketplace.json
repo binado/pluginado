@@ -1,8 +1,17 @@
 {
     "name": "pluginado",
     "description": "My collection of personal plugins",
-    "owner": { "name": "binado" },
+    "owner": {
+        "name": "binado"
+    },
     "plugins": [
-        { "name": "workflow", "source": "./plugins/workflow" }
+        {
+            "name": "workflow",
+            "source": "./plugins/workflow"
+        },
+        {
+            "name": "healthy-repo",
+            "source": "./plugins/healthy-repo"
+        }
     ]
 }
