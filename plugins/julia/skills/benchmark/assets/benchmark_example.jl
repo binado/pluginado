@@ -46,6 +46,7 @@ function benchmark(; sizes = (129, 4097, 131072))
     end
 
     write_csv(replace(@__FILE__, r"\.jl$" => ".csv"), results)
+    write_table_md(replace(@__FILE__, r"\.jl$" => ".md"), results)
 end
 
 # One row per trial, with times in nanoseconds, as in the BenchmarkTools manual.
@@ -66,6 +67,29 @@ function write_csv(path, results)
         ]) for (n, method, trial) in results
     ]
     writedlm(path, vcat(header, reduce(vcat, rows)), ',')
+    println("Wrote $path")
+end
+
+# The same trials as a markdown table, with times and memory in readable units.
+function write_table_md(path, results)
+    lines = [
+        "| n | method | min | median | mean | std | allocs | memory |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for (n, method, trial) in results
+        cells = (
+            n,
+            method,
+            BenchmarkTools.prettytime(minimum(trial).time),
+            BenchmarkTools.prettytime(median(trial).time),
+            BenchmarkTools.prettytime(mean(trial).time),
+            BenchmarkTools.prettytime(std(trial).time),
+            trial.allocs,
+            BenchmarkTools.prettymemory(trial.memory),
+        )
+        push!(lines, "| " * join(cells, " | ") * " |")
+    end
+    write(path, join(lines, "\n") * "\n")
     println("Wrote $path")
 end
 
