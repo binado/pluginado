@@ -28,6 +28,7 @@ claude plugin add workflow@pluginado
 | [workflow](plugins/workflow/README.md) | `handoff-read`, `handoff-write`, `to-issue`, `scratchpad` skills |
 | [healthy-repo](plugins/healthy-repo/README.md) | `create-readme` skill |
 | [julia](plugins/julia/README.md) | `benchmark` skill |
+| [research](plugins/research/README.md) | `arxiv`, `latex` skills |
 
 ## Skills
 
@@ -39,6 +40,8 @@ claude plugin add workflow@pluginado
 | [scratchpad](plugins/workflow/skills/scratchpad/SKILL.md) | Create a temporary computation script in the repo's `.scratchpad/` directory, run it, explain its output, and ask whether to delete it. |
 | [create-readme](plugins/healthy-repo/skills/create-readme/SKILL.md) | Create a concise README.md for a repository or package from a standard template. |
 | [benchmark](plugins/julia/skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, summarizing each trial's statistics in a table, and saving them to a CSV. |
+| [arxiv](plugins/research/skills/arxiv/SKILL.md) | Fetch an arXiv paper PDF and LaTeX source into .research/references using the bundled fetch script. |
+| [latex](plugins/research/skills/latex/SKILL.md) | Write clear academic LaTeX and compile it with latexmk or tectonic via the bundled compile script. |
 
 ## Acknowledgments
 
