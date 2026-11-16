@@ -153,10 +153,13 @@ def main() -> None:
         f"/plugin install {args.name} --marketplace {install_target}\n```\n"
     )
 
-    (plugin_dir / ".claude-plugin").mkdir(parents=True)
-    (plugin_dir / ".claude-plugin" / "plugin.json").write_text(
-        json.dumps(claude_manifest, indent=4) + "\n", encoding="utf-8"
-    )
+    # .claude-plugin and .codex-plugin manifests share the same content
+    # (root plugin.json adds "$schema"); readers only need name/version.
+    for manifest_dir in (".claude-plugin", ".codex-plugin"):
+        (plugin_dir / manifest_dir).mkdir(parents=True)
+        (plugin_dir / manifest_dir / "plugin.json").write_text(
+            json.dumps(claude_manifest, indent=4) + "\n", encoding="utf-8"
+        )
     (plugin_dir / "plugin.json").write_text(
         json.dumps(agent_manifest, indent=4) + "\n", encoding="utf-8"
     )
