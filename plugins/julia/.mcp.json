@@ -1,0 +1,7 @@
+{
+    "mcpServers": {
+        "julia": {
+            "command": "juliamcp"
+        }
+    }
+}
