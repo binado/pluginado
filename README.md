@@ -42,7 +42,7 @@ claude plugin add workflow@pluginado
 | [version-bump](plugins/healthy-repo/skills/version-bump/SKILL.md) | Bump a package version, update CHANGELOG.md, open a release PR, and tag the release. |
 | [benchmark](plugins/julia/skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, summarizing each trial's statistics in a table, and saving them to a CSV. |
 | [arxiv](plugins/research/skills/arxiv/SKILL.md) | Fetch an arXiv paper PDF and LaTeX source into .research/references using the bundled fetch script. |
-| [latex](plugins/research/skills/latex/SKILL.md) | Write clear academic LaTeX and compile it with latexmk or tectonic via the bundled compile script. |
+| [latex](plugins/research/skills/latex/SKILL.md) | Write clear academic LaTeX. |
 
 ## Acknowledgments
 
