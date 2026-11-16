@@ -28,6 +28,7 @@ claude plugin add workflow@pluginado
 | [workflow](plugins/workflow/README.md) | `handoff-read`, `handoff-write`, `to-issue`, `scratchpad` skills |
 | [healthy-repo](plugins/healthy-repo/README.md) | `create-readme`, `version-bump` skills |
 | [julia](plugins/julia/README.md) | `benchmark` skill |
+| [research](plugins/research/README.md) | `arxiv`, `latex`, `notebook` skills |
 
 ## Skills
 
@@ -40,6 +41,9 @@ claude plugin add workflow@pluginado
 | [create-readme](plugins/healthy-repo/skills/create-readme/SKILL.md) | Create a concise README.md for a repository or package from a standard template. |
 | [version-bump](plugins/healthy-repo/skills/version-bump/SKILL.md) | Bump a package version, update CHANGELOG.md, open a release PR, and tag the release. |
 | [benchmark](plugins/julia/skills/benchmark/SKILL.md) | Benchmark Julia code with BenchmarkTools by writing a script to `./.benchmark/<name>.jl`, running it, summarizing each trial's statistics in a table, and saving them to a CSV. |
+| [arxiv](plugins/research/skills/arxiv/SKILL.md) | Fetch an arXiv paper PDF and LaTeX source into .research/references using the bundled fetch script. |
+| [latex](plugins/research/skills/latex/SKILL.md) | Write clear academic LaTeX. |
+| [notebook](plugins/research/skills/notebook/SKILL.md) | Write well-structured Jupyter, marimo, or Pluto notebooks with a title, imports cell, config cell, and semantic sections. |
 
 ## Acknowledgments
 

@@ -16,6 +16,10 @@
         {
             "name": "julia",
             "source": "./plugins/julia"
+        },
+        {
+            "name": "research",
+            "source": "./plugins/research"
         }
     ]
 }
